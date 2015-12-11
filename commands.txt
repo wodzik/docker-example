@@ -1,0 +1,16 @@
+site install:
+ - drush site-install --db-url=mysql://user:pass@mysql/db --account-name=admin --account-pass=123 --account-mail=admin@example.dev droptica_example
+
+Run drupal dev container without database linking:
+ - docker run -it --rm -v "$PWD":/app  droptica/drupal-dev
+
+Run drupal dev container with linking:
+ - docker run -it --rm -v "$PWD":/app --link warsztaty_mysql_1:mysql droptica/drupal-dev
+
+Drupal settings:
+
+$conf['redis_client_interface'] = 'PhpRedis'; // Can be "Predis".
+$conf['redis_client_host']      = 'redis';  // Your Redis instance hostname.
+$conf['lock_inc']               = 'sites/all/modules/contrib/redis/redis.lock.inc';
+$conf['path_inc']               = 'sites/all/modules/contrib/redis/redis.path.inc';
+$conf['cache_backends'][]       = 'sites/all/modules/contrib/redis/redis.autoload.inc';

@@ -1,0 +1,16 @@
+web:
+  image: nginx
+
+
+mysql:
+  image: mysql:5.6
+
+
+redis:
+  image: redis
+
+elastic:
+  image: elasticsearch
+
+php:
+  build: ./docker/
